@@ -9,8 +9,8 @@ import java.nio.file.Path;
 
 public class ImageFile {
 
-    // Update to handle different types of Path Structures, as well as ensure
-    // the desired path exists and is in a correct path format.
+    private static final short MIN_PATH_LENGTH = 5;
+
     public static byte[] extract(String pathStr) throws IOException {
         Path path = Path.of(pathStr);
         if (!doesPathExist(path)) {
@@ -31,6 +31,6 @@ public class ImageFile {
     }
 
     private static boolean doesPathExist(Path path) {
-        return path != null && Files.exists(path);
+        return path != null && path.toString().length() > MIN_PATH_LENGTH && Files.exists(path);
     }
 }
